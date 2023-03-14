@@ -25,5 +25,5 @@ export default function App() {
 const Tudo = styled.div`
 height: 667px;
 width: 375px;
-background-color: gray;
+background-color: yellow;
 `
