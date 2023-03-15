@@ -5,15 +5,15 @@ import logo from "../assets/logo.png"
 export default function Home() {
     return (
         <HomeContainer>
-            <img src={logo} alt="logo"/>
+            <img src={logo} alt="logo" />
             <form>
                 <input placeholder="email" />
                 <input placeholder="senha" />
                 <button type="submit">Entrar</button>
             </form>
-            <Link>
+            <StyledLink>
                 <p>Não tem uma conta? Cadastre-se!</p>
-            </Link>
+            </StyledLink>
         </HomeContainer>
     )
 }
@@ -58,6 +58,10 @@ p{
     color: #52b6ff;
     font-size: 14px;
     font-weight: 400;
+    
     //cor sublinhado
 }
+`
+const StyledLink = styled(Link)`
+    text-decoration-color: #52b6ff;
 `
