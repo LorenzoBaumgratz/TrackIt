@@ -1,17 +1,49 @@
-import { Link } from "react-router-dom"
+import axios from "axios";
+import { useEffect, useState } from "react"
+import { ThreeDots } from "react-loader-spinner";
+import { Link, useNavigate } from "react-router-dom"
 import styled from "styled-components"
 import logo from "../assets/logo.png"
 
 export default function Home() {
+
+    const [loginEmail,setLoginEmail]=useState([]);
+    const [loginSenha,setLoginSenha]=useState([]);
+    const [trancarLogin, setTrancarLogin] = useState(false);
+    const navigate=useNavigate()
+
+    useEffect(()=>{
+    setTrancarLogin(false);
+    },[])
+
+    function login(e){
+        e.preventDefault();
+        setTrancarLogin(true);
+
+        axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login",{
+            email: loginEmail,
+            password: loginSenha
+        })
+        .then(res=>navigate("/hoje"))
+        .catch(err=>{
+            alert(err.response.data.message)
+            setTrancarLogin(false);
+        })
+    }
+
     return (
         <HomeContainer>
             <img src={logo} alt="logo" />
-            <form>
-                <input placeholder="email" />
-                <input placeholder="senha" />
-                <button type="submit">Entrar</button>
+            <form onSubmit={login}>
+                <input disabled={trancarLogin? true:false} type="email" placeholder="email" onChange={(e)=>setLoginEmail(e.target.value)}/>
+                <input disabled={trancarLogin? true:false} type="password" placeholder="senha" onChange={(e)=>setLoginSenha(e.target.value)}/>
+                <button disabled={trancarLogin? true:false} type="submit">{trancarLogin? <ThreeDots
+                height="15"
+                width="340"
+                color="white"
+            />:"Entrar"}</button>
             </form>
-            <StyledLink>
+            <StyledLink to="/cadastro">
                 <p>Não tem uma conta? Cadastre-se!</p>
             </StyledLink>
         </HomeContainer>
@@ -58,8 +90,6 @@ p{
     color: #52b6ff;
     font-size: 14px;
     font-weight: 400;
-    
-    //cor sublinhado
 }
 `
 const StyledLink = styled(Link)`

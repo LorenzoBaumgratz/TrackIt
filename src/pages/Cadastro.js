@@ -1,21 +1,57 @@
-import { Link } from "react-router-dom"
+import axios from "axios"
+import { useEffect, useState } from "react"
+import { ThreeDots } from "react-loader-spinner"
+import { Link, useNavigate } from "react-router-dom"
 import styled from "styled-components"
 import logo from "../assets/logo.png"
 
-export default function Cadastro(){
-    return(
+export default function Cadastro() {
+    const [email, setEmail] = useState([]);
+    const [senha, setSenha] = useState([]);
+    const [nome, setNome] = useState([]);
+    const [foto, setFoto] = useState([]);
+    const [trancar, setTrancar] = useState(false);
+
+    useEffect(()=>{
+    setTrancar(false);
+    },[])
+    
+    const navigate=useNavigate();
+
+    function cadastrar(e) {
+        e.preventDefault();
+        setTrancar(true);
+        axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up",
+        {
+            email: email,
+            name: nome,
+            image: foto,
+            password: senha
+         })
+        .then(res=>navigate("/"))
+        .catch(err=>{
+            alert(err.response.data.message)
+            setTrancar(false);
+        })
+    }
+
+    return (
         <CadastroContainer>
             <img src={logo} alt="logo" />
-            <form>
-                <input placeholder="email" />
-                <input placeholder="senha" />
-                <input placeholder="nome" />
-                <input placeholder="foto" />
-                <button type="submit">Cadastrar</button>
+            <form onSubmit={cadastrar}>
+                <input disabled={trancar? true:false} type="email" placeholder="email" onChange={(e)=>setEmail(e.target.value)}/>
+                <input disabled={trancar? true:false} type="password" placeholder="senha" onChange={(e)=>setSenha(e.target.value)}/>
+                <input disabled={trancar? true:false} type="text" placeholder="nome" onChange={(e)=>setNome(e.target.value)}/>
+                <input  disabled={trancar? true:false} placeholder="foto" onChange={(e)=>setFoto(e.target.value)}/>
+                <button disabled={trancar? true:false} type="submit">{trancar? <ThreeDots
+                height="15"
+                width="340"
+                color="white"
+            />:"Cadastrar"}</button>
             </form>
-            <Link>
+            <StyledLink to="/">
                 <p>Já tem uma conta? Faça login!</p>
-            </Link>
+            </StyledLink>
         </CadastroContainer>
     )
 }
@@ -61,4 +97,7 @@ p{
     font-size: 14px;
     font-weight: 400;
 }
+`
+const StyledLink = styled(Link)`
+    text-decoration-color: #52b6ff;
 `
