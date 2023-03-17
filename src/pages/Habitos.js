@@ -11,7 +11,7 @@ import { useLogin } from "../context";
 export default function Habitos() {
     const { usuario, dias, setDias, hab, setHab } = useLogin()
     const [abrir, setAbrir] = useState(false)
-    const [nomeHab, setNomeHab] = useState([])
+    const [nomeHab, setNomeHab] = useState("")
     const [carregando, setCarregando] = useState(false)
 
     console.log("token?", usuario)
@@ -72,7 +72,7 @@ export default function Habitos() {
                     <button onClick={() => setAbrir(true)} data-test="habit-create-btn">+</button>
                 </Hab>
                 <NewHab abrir={abrir} data-test="habit-create-container" >
-                    <input type="text" onChange={(e) => setNomeHab(e.target.value)} data-test="habit-name-input" disabled={(carregando?true:false)}/>
+                    <input type="text" value={nomeHab} onChange={(e) => setNomeHab(e.target.value)} data-test="habit-name-input" disabled={(carregando?true:false)}/>
                     <Days required/>
                     <Botoes>
                         <span onClick={() => {

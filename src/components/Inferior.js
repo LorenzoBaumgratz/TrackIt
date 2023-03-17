@@ -8,8 +8,8 @@ export default function Inferior() {
     return (
         <ContainerInf data-test="menu" >
             <Botao onClick={() => navigate("/habitos")} data-test="habit-link" >Hábitos</Botao>
-            <Circulo  >
-                <CircularProgressbar onClick={() => navigate("/hoje")} data-test="today-link" value={50} text="Hoje" background backgroundPadding={6} styles={{
+            <Circulo  onClick={() => navigate("/hoje")} data-test="today-link">
+                <CircularProgressbar value={50} text="Hoje" background backgroundPadding={6} styles={{
                     path:{
                         stroke: `rgba(255,255,255, 1)`,
                         strokeLinecap:`round`
@@ -23,10 +23,7 @@ export default function Inferior() {
                     },
                     trail:{
                         stroke:`#52b6ff`
-                    }
-                    
-
-                  
+                    }   
                 }} 
                 />
             </Circulo>
