@@ -49,6 +49,8 @@ export default function Habitos() {
                     .catch((err) => err.response.data.message)
             })
             .catch(err=>alert(err.response.data.message))
+
+            setNomeHab("")
     }
 
 
