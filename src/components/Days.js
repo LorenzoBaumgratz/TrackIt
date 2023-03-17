@@ -1,7 +1,7 @@
 import styled from "styled-components"
 import { useLogin } from "../context"
 
-export default function Days() {
+export default function Days(props) {
     const { dias, setDias } = useLogin()
 
     function selecionar(data) {
@@ -20,13 +20,13 @@ export default function Days() {
 
     return (
         <Week>
-            <Botao onClick={() => selecionar(7)} funcao={7} dias={dias} data-test="habit-day" >D</Botao>
-            <Botao onClick={() => selecionar(1)} funcao={1} dias={dias} data-test="habit-day" >S</Botao>
-            <Botao onClick={() => selecionar(2)} funcao={2} dias={dias} data-test="habit-day" >T</Botao>
-            <Botao onClick={() => selecionar(3)} funcao={3} dias={dias} data-test="habit-day" >Q</Botao>
-            <Botao onClick={() => selecionar(4)} funcao={4} dias={dias} data-test="habit-day" >Q</Botao>
-            <Botao onClick={() => selecionar(5)} funcao={5} dias={dias} data-test="habit-day" >S</Botao>
-            <Botao onClick={() => selecionar(6)} funcao={6} dias={dias} data-test="habit-day" >S</Botao>
+            <Botao onClick={() => selecionar(7)} funcao={7} dias={dias} data-test="habit-day" disabled={(props.carregando ? true : false)}>D</Botao>
+            <Botao onClick={() => selecionar(1)} funcao={1} dias={dias} data-test="habit-day" disabled={(props.carregando ? true : false)}>S</Botao>
+            <Botao onClick={() => selecionar(2)} funcao={2} dias={dias} data-test="habit-day" disabled={(props.carregando ? true : false)}>T</Botao>
+            <Botao onClick={() => selecionar(3)} funcao={3} dias={dias} data-test="habit-day" disabled={(props.carregando ? true : false)}>Q</Botao>
+            <Botao onClick={() => selecionar(4)} funcao={4} dias={dias} data-test="habit-day" disabled={(props.carregando ? true : false)}>Q</Botao>
+            <Botao onClick={() => selecionar(5)} funcao={5} dias={dias} data-test="habit-day" disabled={(props.carregando ? true : false)}>S</Botao>
+            <Botao onClick={() => selecionar(6)} funcao={6} dias={dias} data-test="habit-day" disabled={(props.carregando ? true : false)}>S</Botao>
         </Week>
     )
 }

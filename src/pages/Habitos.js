@@ -31,7 +31,7 @@ export default function Habitos() {
         }
 
         setCarregando(true)
-        if(dias.length===0){
+        if (dias.length === 0) {
             setAbrir(false)
             setCarregando(false)
             return
@@ -48,9 +48,9 @@ export default function Habitos() {
                     })
                     .catch((err) => err.response.data.message)
             })
-            .catch(err=>alert(err.response.data.message))
+            .catch(err => alert(err.response.data.message))
 
-            setNomeHab("")
+        setNomeHab("")
     }
 
 
@@ -74,17 +74,15 @@ export default function Habitos() {
                     <Botao onClick={() => setAbrir(true)} data-test="habit-create-btn">+</Botao>
                 </Hab>
                 <NewHab abrir={abrir} data-test="habit-create-container" >
-                    <input type="text" value={nomeHab} onChange={(e) => setNomeHab(e.target.value)} data-test="habit-name-input" disabled={(carregando?true:false)}/>
-                    <Days required/>
+                    <input type="text" value={nomeHab} onChange={(e) => setNomeHab(e.target.value)} data-test="habit-name-input" disabled={(carregando ? true : false)} />
+                    <Days carregando={carregando} />
                     <Botoes>
-                        <span onClick={() => {
-                            setAbrir(false)
-                            }} data-test="habit-create-cancel-btn" >Cancelar</span>
-                        <Salvar type="submit" onClick={addHab} data-test="habit-create-save-btn" disabled={(carregando?true:false)}>{carregando? <ThreeDots
-                height="11"
-                width="84"
-                color="white"
-            />:"Salvar"}</Salvar>
+                        <Botao2 onClick={() => setAbrir(false)} data-test="habit-create-cancel-btn" disabled={(carregando ? true : false)}>Cancelar</Botao2>
+                        <Salvar type="submit" onClick={addHab} data-test="habit-create-save-btn" disabled={(carregando ? true : false)}>{carregando ? <ThreeDots
+                            height="11"
+                            width="84"
+                            color="white"
+                        /> : "Salvar"}</Salvar>
                     </Botoes>
                 </NewHab>
                 {(hab.length === 0) ? <p>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</p> : ""}
@@ -124,7 +122,7 @@ color: #126ba5;
 font-size: 23px;
 }
 `
-const Botao=styled.button`  
+const Botao = styled.button`  
     background-color: #52b6ff;
     border-radius: 5px;
     width: 35px;
@@ -154,10 +152,6 @@ const Botoes = styled.div`
     align-items: center;
     justify-content: end;
     gap: 23px;
-    span{
-        color: #52b6ff;
-        font-size: 16px;
-    }
 `
 const Salvar = styled.button`
     border: none;
@@ -167,4 +161,10 @@ const Salvar = styled.button`
     background-color: #52b6ff;
     color: white;
     font-size: 16px;
+`
+const Botao2 = styled.button`
+color: #52b6ff;
+font-size: 16px;
+background: none;
+border: none;
 `
