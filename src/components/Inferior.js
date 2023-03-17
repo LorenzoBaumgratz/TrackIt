@@ -1,13 +1,36 @@
+import { CircularProgressbar } from "react-circular-progressbar";
 import { useNavigate } from "react-router-dom"
 import styled from "styled-components"
+import 'react-circular-progressbar/dist/styles.css';
 
 export default function Inferior() {
-    const navigate=useNavigate();
+    const navigate = useNavigate();
     return (
         <ContainerInf data-test="menu" >
-            <Botao onClick={()=>navigate("/habitos")} data-test="habit-link" >Hábitos</Botao>
-            <Circulo onClick={()=>navigate("/hoje")} data-test="today-link" >Hoje</Circulo>
-            <Botao onClick={()=>navigate("/historico")} data-test="history-link" >Histórico</Botao>
+            <Botao onClick={() => navigate("/habitos")} data-test="habit-link" >Hábitos</Botao>
+            <Circulo  >
+                <CircularProgressbar onClick={() => navigate("/hoje")} data-test="today-link" value={50} text="Hoje" background backgroundPadding={6} styles={{
+                    path:{
+                        stroke: `rgba(255,255,255, 1)`,
+                        strokeLinecap:`round`
+                    },
+                    background:{
+                        fill:`#52b6ff`
+                    },
+                    text:{
+                        fontSize:`18px`,
+                        fill:`white`
+                    },
+                    trail:{
+                        stroke:`#52b6ff`
+                    }
+                    
+
+                  
+                }} 
+                />
+            </Circulo>
+            <Botao onClick={() => navigate("/historico")} data-test="history-link" >Histórico</Botao>
         </ContainerInf>
     )
 }
@@ -25,16 +48,10 @@ const ContainerInf = styled.div`
     padding: 0 36px;
 `
 
-const Circulo = styled.button`
+const Circulo = styled.div`
     width: 91px;
     height: 91px;
-    background-color: #52b6ff;
-    border-radius: 100px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     margin-bottom: 50px;
-    border: none;
 `
 
 const Botao = styled.button`
