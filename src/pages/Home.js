@@ -1,9 +1,10 @@
 import axios from "axios";
-import { useEffect, useState } from "react"
+import React, { useEffect, useState } from "react"
 import { ThreeDots } from "react-loader-spinner";
 import { Link, useNavigate } from "react-router-dom"
 import styled from "styled-components"
 import logo from "../assets/logo.png"
+import {  useLogin } from "../context";
 
 export default function Home() {
 
@@ -11,6 +12,8 @@ export default function Home() {
     const [loginSenha,setLoginSenha]=useState([]);
     const [trancarLogin, setTrancarLogin] = useState(false);
     const navigate=useNavigate()
+    const {usuario,setUsuario}=useLogin()
+    console.log(usuario)
 
     useEffect(()=>{
     setTrancarLogin(false);
@@ -24,26 +27,30 @@ export default function Home() {
             email: loginEmail,
             password: loginSenha
         })
-        .then(res=>navigate("/hoje"))
+        .then(res=>{
+            console.log(res.data);
+            setUsuario(res.data);
+            navigate("/hoje");
+        })
         .catch(err=>{
-            alert(err.response.data.message)
+            alert(err.response.data.message);
             setTrancarLogin(false);
         })
     }
-
+    
     return (
         <HomeContainer>
             <img src={logo} alt="logo" />
             <form onSubmit={login}>
-                <input disabled={trancarLogin? true:false} type="email" placeholder="email" onChange={(e)=>setLoginEmail(e.target.value)}/>
-                <input disabled={trancarLogin? true:false} type="password" placeholder="senha" onChange={(e)=>setLoginSenha(e.target.value)}/>
-                <button disabled={trancarLogin? true:false} type="submit">{trancarLogin? <ThreeDots
+                <input data-test="email-input" disabled={trancarLogin? true:false} type="email" placeholder="email" onChange={(e)=>setLoginEmail(e.target.value)}/>
+                <input data-test="password-input" disabled={trancarLogin? true:false} type="password" placeholder="senha" onChange={(e)=>setLoginSenha(e.target.value)}/>
+                <button data-test="login-btn" disabled={trancarLogin? true:false} type="submit">{trancarLogin? <ThreeDots
                 height="15"
                 width="340"
                 color="white"
             />:"Entrar"}</button>
             </form>
-            <StyledLink to="/cadastro">
+            <StyledLink to="/cadastro" data-test="signup-link" >
                 <p>Não tem uma conta? Cadastre-se!</p>
             </StyledLink>
         </HomeContainer>

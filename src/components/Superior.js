@@ -1,10 +1,13 @@
 import styled from "styled-components"
+import { useLogin } from "../context"
 
 export default function Superior(){
+    const {usuario}=useLogin();
+
     return(
-        <ContainerSup>
+        <ContainerSup data-test="header" >
             <span>Trackit</span>
-            <img src="https://pbs.twimg.com/profile_images/1446329314/b27Iy43XXs0Vd85scnWI671617485D6F0QH9Z8I_grd_1__400x400.jpg" alt="foto-usuario"/>
+            <img src={usuario.image} alt="foto-usuario"/>
         </ContainerSup>
     )
 }
@@ -20,6 +23,7 @@ const ContainerSup=styled.div`
     align-items: center;
     justify-content: space-between;
     padding: 0 18px;
+    z-index: 1;
     img{
         width: 51px;
         height: 51px;

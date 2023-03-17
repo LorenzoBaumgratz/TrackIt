@@ -8,9 +8,9 @@ export default function Hoje(){
         <>
         <Superior/>
         <ConteudoHoje>
-            <P>Segunda, 17/05</P>
-            <Span>Nenhum hábito concluido ainda</Span>
-            {/* <Span>67% dos hábitos concluídos</Span> */}
+            <P data-test="today">Segunda, 17/05</P>
+            <Span data-test="today-counter">Nenhum hábito concluido ainda</Span>
+            {/* <Span data-test="today-counter">67% dos hábitos concluídos</Span> */}
             <Marcador/>
             <Marcador/>
             <Marcador/>

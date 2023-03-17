@@ -2,13 +2,13 @@ import styled from "styled-components"
 
 export default function Marcador(){
     return(
-        <ConteudoMarcador>
+        <ConteudoMarcador data-test="today-habit-container">
             <Texto>
-            <p>Ler 1 capítulo de livro</p>
-            <span>Sequência atual: 3 dias</span>
-            <span>Seu recorde: 5 dias</span>
+            <p data-test="today-habit-name">Ler 1 capítulo de livro</p>
+            <span data-test="today-habit-sequence">Sequência atual: 3 dias</span>
+            <span data-test="today-habit-record">Seu recorde: 5 dias</span>
             </Texto>
-            <button>X</button>
+            <button data-test="today-habit-check-btn">X</button>
         </ConteudoMarcador>
     )
 }

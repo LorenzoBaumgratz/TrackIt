@@ -1,30 +1,77 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import Days from "../components/Days";
 import Inferior from "../components/Inferior";
 import Superior from "../components/Superior";
 import Task from "../components/Task";
+import { useLogin } from "../context";
 
 export default function Habitos() {
+    const { usuario, dias, setDias, hab, setHab } = useLogin()
+    const [abrir, setAbrir] = useState(false)
+    const [nomeHab, setNomeHab] = useState([])
+
+    console.log("token?", usuario)
+    console.log("dias", dias)
+
+    const config = {
+        headers: {
+            "Authorization": `Bearer ${usuario.token}`
+        }
+    }
+
+    function addHab(e) {
+        e.preventDefault();
+        const body = {
+            name: nomeHab,
+            days: dias
+        }
+
+        axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits", body, config)
+            .then(res => {
+                setAbrir(false)
+                setDias([])
+                axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits", config)
+                    .then((res) => {
+                        setHab(res.data)
+                        console.log("HAB", res.data)
+                    })
+                    .catch((err) => err.response.data.message)
+            })
+            .catch()
+    }
+
+
+
+    useEffect(() => {
+
+        axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits", config)
+            .then((res) => {
+                setHab(res.data)
+                console.log("HAB", res.data)
+            })
+            .catch((err) => err.response.data.message)
+    }, [])
+
     return (
         <>
             <Superior />
             <Conteudo>
                 <Hab>
                     <p>Meus hábitos</p>
-                    <button>+</button>
+                    <button onClick={() => setAbrir(true)} data-test="habit-create-btn">+</button>
                 </Hab>
-                {/* <NewHab>
-                    <input type="text" />
+                <NewHab abrir={abrir} data-test="habit-create-container" >
+                    <input type="text" onChange={(e) => setNomeHab(e.target.value)} data-test="habit-name-input" />
                     <Days />
                     <Botoes>
-                        <span>Cancelar</span>
-                        <Salvar type="submit">Salvar</Salvar>
+                        <span onClick={() => setNomeHab("")} data-test="habit-create-cancel-btn" >Cancelar</span>
+                        <Salvar type="submit" onClick={addHab} data-test="habit-create-save-btn">Salvar</Salvar>
                     </Botoes>
                 </NewHab>
-                <p>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</p> */}
-            <Task/>
-            <Task/>
-            <Task/>
+                {(hab.length === 0) ? <p>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</p> : ""}
+                {hab.map((h, i) => <Task hab={hab[i]} />)}
             </Conteudo>
             <Inferior />
         </>
@@ -68,12 +115,13 @@ button{
     font-size: 27px;
 }
 `
-const NewHab = styled.form`
+const NewHab = styled.div`
     width: 340px;
     height: 180px;
     background-color: white;
     padding: 18px;
     margin-bottom: 29px;
+    display:${(props) => (!props.abrir ? "none" : "")};
     input{
         border: 1px solid #d4d4d4;
         width: 303px;
@@ -81,7 +129,7 @@ const NewHab = styled.form`
         border-radius: 5px;
     }
 `
-const Botoes=styled.div`
+const Botoes = styled.div`
     margin-top: 29px;
     display: flex;
     align-items: center;

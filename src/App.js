@@ -1,5 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import styled from "styled-components";
+import { LoginProvider } from "./context";
 import Cadastro from "./pages/Cadastro";
 import Habitos from "./pages/Habitos";
 import Historico from "./pages/Historico";
@@ -10,13 +11,17 @@ export default function App() {
   return (
     <BrowserRouter>
       <Tudo>
-        <Routes>
-          <Route path="/" element={<Home />}/>
-          <Route path="/cadastro" element={<Cadastro />}/>
-          <Route path="/habitos" element={<Habitos />}/>
-          <Route path="/hoje" element={<Hoje />}/>
-          <Route path="/historico" element={<Historico />}/>
-        </Routes>
+        <LoginProvider>
+          <Routes>
+
+            <Route path="/" element={<Home />} />
+            <Route path="/cadastro" element={<Cadastro />} />
+            <Route path="/habitos" element={<Habitos />} />
+            <Route path="/hoje" element={<Hoje />} />
+            <Route path="/historico" element={<Historico />} />
+
+          </Routes>
+        </LoginProvider>
       </Tudo>
     </BrowserRouter>
   );

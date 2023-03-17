@@ -1,11 +1,13 @@
+import { useNavigate } from "react-router-dom"
 import styled from "styled-components"
 
 export default function Inferior() {
+    const navigate=useNavigate();
     return (
-        <ContainerInf>
-            <Botao>Hábitos</Botao>
-            <Circulo>Hoje</Circulo>
-            <Botao>Histórico</Botao>
+        <ContainerInf data-test="menu" >
+            <Botao onClick={()=>navigate("/habitos")} data-test="habit-link" >Hábitos</Botao>
+            <Circulo onClick={()=>navigate("/hoje")} data-test="today-link" >Hoje</Circulo>
+            <Botao onClick={()=>navigate("/historico")} data-test="history-link" >Histórico</Botao>
         </ContainerInf>
     )
 }
