@@ -13,13 +13,12 @@ export default function Home() {
     const [trancarLogin, setTrancarLogin] = useState(false);
     const navigate=useNavigate()
     const {usuario,setUsuario}=useLogin()
-    console.log(usuario)
 
     useEffect(()=>{
     setTrancarLogin(false);
     },[])
-
-    function login(e){
+    // console.log(usuario)
+    function login(e){  
         e.preventDefault();
         setTrancarLogin(true);
 
@@ -28,7 +27,7 @@ export default function Home() {
             password: loginSenha
         })
         .then(res=>{
-            console.log(res.data);
+            //console.log(res.data);
             setUsuario(res.data);
             navigate("/hoje");
         })
@@ -80,7 +79,6 @@ form{
         border: 1px solid #d4d4d4;
         font-size: 20px;
         font-weight: 400;
-        //deslocar txt um pouco para dir
     }
     button{
         width: 303px;

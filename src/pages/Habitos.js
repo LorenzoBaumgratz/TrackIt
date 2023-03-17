@@ -69,7 +69,7 @@ export default function Habitos() {
             <Conteudo>
                 <Hab>
                     <p>Meus hábitos</p>
-                    <button onClick={() => setAbrir(true)} data-test="habit-create-btn">+</button>
+                    <Botao onClick={() => setAbrir(true)} data-test="habit-create-btn">+</Botao>
                 </Hab>
                 <NewHab abrir={abrir} data-test="habit-create-container" >
                     <input type="text" value={nomeHab} onChange={(e) => setNomeHab(e.target.value)} data-test="habit-name-input" disabled={(carregando?true:false)}/>
@@ -86,7 +86,7 @@ export default function Habitos() {
                     </Botoes>
                 </NewHab>
                 {(hab.length === 0) ? <p>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</p> : ""}
-                {hab.map((h, i) => <Task hab={hab[i]} />)}
+                {hab.map((h, i) => <Task key={hab[i].id} hab={hab[i]} />)}
             </Conteudo>
             <Inferior />
         </>
@@ -121,8 +121,8 @@ p{
 color: #126ba5;
 font-size: 23px;
 }
-
-button{
+`
+const Botao=styled.button`  
     background-color: #52b6ff;
     border-radius: 5px;
     width: 35px;
@@ -130,8 +130,8 @@ button{
     border: none;
     color: white;
     font-size: 27px;
-}
 `
+
 const NewHab = styled.div`
     width: 340px;
     height: 180px;

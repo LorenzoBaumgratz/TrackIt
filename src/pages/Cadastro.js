@@ -79,7 +79,6 @@ form{
         border: 1px solid #d4d4d4;
         font-size: 20px;
         font-weight: 400;
-        //deslocar txt um pouco para dir
     }
     button{
         width: 303px;
