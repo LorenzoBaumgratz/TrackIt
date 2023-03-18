@@ -1,18 +1,19 @@
 import axios from "axios"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import styled from "styled-components"
 import { useLogin } from "../context"
 
 export default function Marcador(props) {
     const [marcado, setMarcado] = useState(props.info.done)
     const { usuario,qntHabFeito,setQntHabFeito } = useLogin()
-
+    
 
     const config = {
         headers: {
             "Authorization": `Bearer ${usuario.token}`
         }
     }
+
 
     function check() {
         const body = {

@@ -8,7 +8,7 @@ import Superior from "../components/Superior";
 import { useLogin } from "../context";
 
 export default function Hoje(){
-    const { usuario,qntHab,qntHabFeito,setQntHab} = useLogin()
+    const { usuario,qntHab,qntHabFeito,setQntHab, setQntHabFeito} = useLogin()
     const [hoje,setHoje]=useState([])
     const weekday=dayjs().locale('pt=br').day();
 
@@ -43,8 +43,16 @@ export default function Hoje(){
             console.log("hoje",res.data)
             setHoje(res.data)
             setQntHab(res.data.length)
+            
         })
         .catch((err)=>console.log(err.response.data.message))
+
+        for(let i=0;i<hoje.length;i++){
+            if(hoje[i].done){
+                setQntHabFeito(qntHabFeito +1)
+            }
+        }
+        
     },[])
     console.log("hab feitos",qntHabFeito)
     return(
@@ -53,7 +61,7 @@ export default function Hoje(){
         <ConteudoHoje>
             <P data-test="today">{findWeekday()}, {dayjs().format('DD/MM')}</P>
             <Span data-test="today-counter">{((qntHabFeito!==0)?<Span2 data-test="today-counter">{Math.ceil(qntHabFeito/qntHab*100)}% dos hábitos concluídos</Span2>:"Nenhum hábito concluido ainda")}</Span>
-            {hoje.map((h,i)=><Marcador key={hoje[i].id} info={hoje[i]}/>)}
+            {hoje.map((h,i)=><Marcador key={hoje[i].id} info={hoje[i]} /> )}
 
         </ConteudoHoje>
         <Inferior/>
