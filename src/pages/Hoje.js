@@ -1,16 +1,17 @@
 import axios from "axios";
+import dayjs from "dayjs";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import Inferior from "../components/Inferior";
 import Marcador from "../components/Marcador";
 import Superior from "../components/Superior";
 import { useLogin } from "../context";
+//import weekday from 'dayjs/plugin/weekday';
 
 export default function Hoje(){
     const { usuario,qntHab,qntHabFeito,setQntHab} = useLogin()
     const [hoje,setHoje]=useState([])
-
-
+    console.log("day",dayjs())
     const config = {
         headers: {
             "Authorization": `Bearer ${usuario.token}`
@@ -31,8 +32,8 @@ export default function Hoje(){
         <>
         <Superior/>
         <ConteudoHoje>
-            <P data-test="today">Segunda, 17/05</P>
-            <Span data-test="today-counter">{((qntHabFeito!==0)?<Span2>{qntHabFeito/qntHab*100}% dos hábitos concluídos</Span2>:"Nenhum hábito concluido ainda")}</Span>
+            <P data-test="today">Sexta, {dayjs().$D}/{dayjs().$M+1}</P>
+            <Span data-test="today-counter">{((qntHabFeito!==0)?<Span2>{Math.ceil(qntHabFeito/qntHab*100)}% dos hábitos concluídos</Span2>:"Nenhum hábito concluido ainda")}</Span>
             {hoje.map((h,i)=><Marcador key={hoje[i].id} info={hoje[i]}/>)}
 
         </ConteudoHoje>
