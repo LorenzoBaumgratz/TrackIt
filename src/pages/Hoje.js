@@ -33,7 +33,7 @@ export default function Hoje(){
         <Superior/>
         <ConteudoHoje>
             <P data-test="today">Sexta, {dayjs().$D}/{dayjs().$M+1}</P>
-            <Span data-test="today-counter">{((qntHabFeito!==0)?<Span2>{Math.ceil(qntHabFeito/qntHab*100)}% dos hábitos concluídos</Span2>:"Nenhum hábito concluido ainda")}</Span>
+            <Span data-test="today-counter">{((qntHabFeito!==0)?<Span2 data-test="today-counter">{Math.ceil(qntHabFeito/qntHab*100)}% dos hábitos concluídos</Span2>:"Nenhum hábito concluido ainda")}</Span>
             {hoje.map((h,i)=><Marcador key={hoje[i].id} info={hoje[i]}/>)}
 
         </ConteudoHoje>

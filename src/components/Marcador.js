@@ -4,7 +4,7 @@ import styled from "styled-components"
 import { useLogin } from "../context"
 
 export default function Marcador(props) {
-    const [marcado, setMarcado] = useState(false)
+    const [marcado, setMarcado] = useState(props.info.done)
     const { usuario,qntHabFeito,setQntHabFeito } = useLogin()
 
 
@@ -25,7 +25,7 @@ export default function Marcador(props) {
             setMarcado(false)
             setQntHabFeito(qntHabFeito-1)
         } else {
-            axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${props.info.id}/check`, body, config)
+            axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${props.info.id}/check`, {}, config)
                 .then((res) => console.log("deu bom,habilitou",res))
                 .catch((err) => console.log("deu ruim"))
             setMarcado(true)
