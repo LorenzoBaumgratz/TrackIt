@@ -6,12 +6,31 @@ import Inferior from "../components/Inferior";
 import Marcador from "../components/Marcador";
 import Superior from "../components/Superior";
 import { useLogin } from "../context";
-//import weekday from 'dayjs/plugin/weekday';
 
 export default function Hoje(){
     const { usuario,qntHab,qntHabFeito,setQntHab} = useLogin()
     const [hoje,setHoje]=useState([])
-    console.log("day",dayjs())
+    const weekday=dayjs().locale('pt=br').day();
+
+    function findWeekday(){
+        switch(weekday){
+            case 1:
+                return "Segunda"
+            case 2:
+                return "Terça"
+            case 3:
+                return "Quarta"
+            case 4:
+                return "Quinta"
+            case 5:
+                return "Sexta"
+            case 6:
+                return "Sabado"
+            case 7:
+                return "Domingo"
+        }
+    }
+
     const config = {
         headers: {
             "Authorization": `Bearer ${usuario.token}`
@@ -32,7 +51,7 @@ export default function Hoje(){
         <>
         <Superior/>
         <ConteudoHoje>
-            <P data-test="today">Sexta, {dayjs().$D}/{dayjs().$M+1}</P>
+            <P data-test="today">{findWeekday()}, {dayjs().format('DD/MM')}</P>
             <Span data-test="today-counter">{((qntHabFeito!==0)?<Span2 data-test="today-counter">{Math.ceil(qntHabFeito/qntHab*100)}% dos hábitos concluídos</Span2>:"Nenhum hábito concluido ainda")}</Span>
             {hoje.map((h,i)=><Marcador key={hoje[i].id} info={hoje[i]}/>)}
 
