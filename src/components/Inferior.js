@@ -2,14 +2,19 @@ import { CircularProgressbar } from "react-circular-progressbar";
 import { useNavigate } from "react-router-dom"
 import styled from "styled-components"
 import 'react-circular-progressbar/dist/styles.css';
+import { useLogin } from "../context";
 
 export default function Inferior() {
     const navigate = useNavigate();
+    const { qntHab,qntHabFeito} = useLogin()
+    console.log("hab feitos: ",qntHabFeito)
+    console.log("num hab: ",qntHab)
+
     return (
         <ContainerInf data-test="menu" >
             <Botao onClick={() => navigate("/habitos")} data-test="habit-link" >Hábitos</Botao>
             <Circulo  onClick={() => navigate("/hoje")} data-test="today-link">
-                <CircularProgressbar value={50} text="Hoje" background backgroundPadding={6} styles={{
+                <CircularProgressbar value={(qntHabFeito/qntHab)*100} text="Hoje" background backgroundPadding={6} styles={{
                     path:{
                         stroke: `rgba(255,255,255, 1)`,
                         strokeLinecap:`round`
