@@ -32,7 +32,7 @@ export default function Hoje(){
         <Superior/>
         <ConteudoHoje>
             <P data-test="today">Segunda, 17/05</P>
-            <Span data-test="today-counter">{((qntHabFeito!==0)?`${qntHabFeito/qntHab*100}% dos hábitos concluídos`:"Nenhum hábito concluido ainda")}</Span>
+            <Span data-test="today-counter">{((qntHabFeito!==0)?<Span2>{qntHabFeito/qntHab*100}% dos hábitos concluídos</Span2>:"Nenhum hábito concluido ainda")}</Span>
             {hoje.map((h,i)=><Marcador key={hoje[i].id} info={hoje[i]}/>)}
 
         </ConteudoHoje>
@@ -54,6 +54,9 @@ const Span=styled.span`
     font-size: 18px;
     width: 100%;
     margin-bottom: 28px;
+`
+const Span2=styled.span`
+    color: #8fc549;
 `
 
 const P=styled.p`

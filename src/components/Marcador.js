@@ -20,13 +20,13 @@ export default function Marcador(props) {
         }
         if (marcado) {
             axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${props.info.id}/uncheck`, body, config)
-                .then((res) => console.log("deu bom,desabilitou"))
+                .then((res) => console.log("deu bom,desabilitou",res))
                 .catch((err) => console.log("deu ruim"))
             setMarcado(false)
             setQntHabFeito(qntHabFeito-1)
         } else {
             axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${props.info.id}/check`, body, config)
-                .then((res) => console.log("deu bom,habilitou"))
+                .then((res) => console.log("deu bom,habilitou",res))
                 .catch((err) => console.log("deu ruim"))
             setMarcado(true)
             setQntHabFeito(qntHabFeito+1)
