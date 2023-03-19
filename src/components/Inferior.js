@@ -14,7 +14,7 @@ export default function Inferior() {
         <ContainerInf data-test="menu" >
             <Botao onClick={() => navigate("/habitos")} data-test="habit-link" >Hábitos</Botao>
             <Circulo  onClick={() => navigate("/hoje")} data-test="today-link">
-                <CircularProgressbar value={(qntHabFeito/qntHab)*100} text="Hoje" background backgroundPadding={6} styles={{
+                <CircularProgressbar value={ (qntHab!==0?((qntHabFeito/qntHab)*100):0)} text="Hoje" background backgroundPadding={6} styles={{
                     path:{
                         stroke: `rgba(255,255,255, 1)`,
                         strokeLinecap:`round`

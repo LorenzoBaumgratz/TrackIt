@@ -26,8 +26,9 @@ export default function Hoje(){
                 return "Sexta"
             case 6:
                 return "Sabado"
-            case 7:
+            case 0:
                 return "Domingo"
+           
         }
     }
 
@@ -40,7 +41,7 @@ export default function Hoje(){
     useEffect(()=>{
         axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today",config)
         .then((res)=>{
-            console.log("hoje",res.data)
+            console.log("hoje",res)
             setHoje(res.data)
             setQntHab(res.data.length)   
             const teste=(res.data.filter((h)=>h.done===true))
