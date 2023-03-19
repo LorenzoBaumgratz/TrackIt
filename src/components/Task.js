@@ -3,12 +3,14 @@ import styled from "styled-components"
 import { useLogin } from "../context"
 
 export default function Task(props) {
-    const { usuario, setHab } = useLogin()
+    const { usuario, setHab,qntHab ,setQntHab } = useLogin()
     function deleteHab() {
         if (window.confirm("Deseja excluir?")) {
             console.log(props.hab)
             axios.delete(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${props.hab.id}`, config)
             .then(()=>{
+                setQntHab(qntHab-1)
+
                 axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits", config)
                 .then((res) => {
                     setHab(res.data)

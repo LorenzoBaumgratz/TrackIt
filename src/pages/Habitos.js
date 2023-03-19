@@ -9,7 +9,7 @@ import Task from "../components/Task";
 import { useLogin } from "../context";
 
 export default function Habitos() {
-    const { usuario, dias, setDias, hab, setHab } = useLogin()
+    const { usuario, dias, setDias, hab, setHab,qntHab,setQntHab } = useLogin()
     const [abrir, setAbrir] = useState(false)
     const [nomeHab, setNomeHab] = useState("")
     const [carregando, setCarregando] = useState(false)
@@ -29,7 +29,7 @@ export default function Habitos() {
             name: nomeHab,
             days: dias
         }
-
+        setQntHab(qntHab+1)
         setCarregando(true)
         if (dias.length === 0) {
             setAbrir(false)
