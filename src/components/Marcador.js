@@ -14,6 +14,15 @@ export default function Marcador(props) {
         }
     }
 
+    // useEffect(()=>{
+    //     console.log("info",props.info.done)
+
+    //         if(props.info.done===true){
+    //             console.log("foi")
+    //             setQntHabFeito(qntHabFeito +1)
+    //         }
+        
+    // },[])
 
     function check() {
         const body = {

@@ -42,17 +42,13 @@ export default function Hoje(){
         .then((res)=>{
             console.log("hoje",res.data)
             setHoje(res.data)
-            setQntHab(res.data.length)
-            
+            setQntHab(res.data.length)   
+            const teste=(res.data.filter((h)=>h.done===true))
+            console.log("teste",teste.length)
+            setQntHabFeito(teste.length);
         })
         .catch((err)=>console.log(err.response.data.message))
-
-        for(let i=0;i<hoje.length;i++){
-            if(hoje[i].done){
-                setQntHabFeito(qntHabFeito +1)
-            }
-        }
-        
+       
     },[])
     console.log("hab feitos",qntHabFeito)
     return(
