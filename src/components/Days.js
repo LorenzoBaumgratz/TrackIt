@@ -20,7 +20,7 @@ export default function Days(props) {
 
     return (
         <Week>
-            <Botao onClick={() => selecionar(7)} funcao={7} dias={dias} data-test="habit-day" disabled={(props.carregando ? true : false)}>D</Botao>
+            <Botao onClick={() => selecionar(0)} funcao={0} dias={dias} data-test="habit-day" disabled={(props.carregando ? true : false)}>D</Botao>
             <Botao onClick={() => selecionar(1)} funcao={1} dias={dias} data-test="habit-day" disabled={(props.carregando ? true : false)}>S</Botao>
             <Botao onClick={() => selecionar(2)} funcao={2} dias={dias} data-test="habit-day" disabled={(props.carregando ? true : false)}>T</Botao>
             <Botao onClick={() => selecionar(3)} funcao={3} dias={dias} data-test="habit-day" disabled={(props.carregando ? true : false)}>Q</Botao>

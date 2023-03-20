@@ -41,7 +41,7 @@ export default function Hoje(){
     useEffect(()=>{
         axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today",config)
         .then((res)=>{
-            console.log("hoje",res)
+            console.log("hoje",res.data)
             setHoje(res.data)
             setQntHab(res.data.length)   
             const teste=(res.data.filter((h)=>h.done===true))
