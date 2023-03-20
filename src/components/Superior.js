@@ -33,5 +33,6 @@ const ContainerSup=styled.div`
         font-size: 39px;
         font-weight: 400;
         color: white;
+        font-family: 'Playball', cursive;
     }
 `
