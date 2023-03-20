@@ -8,10 +8,16 @@ export const LoginProvider = (props) => {
     const [hab, setHab] = useState([])
     const [qntHab,setQntHab]=useState(0)
     const [qntHabFeito,setQntHabFeito]=useState(0)
+    const [hoje,setHoje]=useState([])
+
+
+
+    
+    
 
 
     return (
-        <LoginContext.Provider value={{ usuario, setUsuario, dias, setDias, hab, setHab, qntHab,setQntHab,qntHabFeito,setQntHabFeito}}>
+        <LoginContext.Provider value={{ usuario, setUsuario, dias, setDias, hab, setHab, qntHab,setQntHab,qntHabFeito,setQntHabFeito,hoje,setHoje}}>
             {props.children}
         </LoginContext.Provider>
     )
