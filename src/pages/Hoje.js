@@ -57,7 +57,7 @@ export default function Hoje(){
         <Superior/>
         <ConteudoHoje>
             <P data-test="today">{findWeekday()}, {dayjs().format('DD/MM')}</P>
-            <Span data-test="today-counter">{((qntHabFeito!==0)?<Span2 data-test="today-counter">{Math.ceil(qntHabFeito/qntHab*100)}% dos hábitos concluídos</Span2>:"Nenhum hábito concluido ainda")}</Span>
+            <Span data-test="today-counter" qnt={qntHabFeito}>{((qntHabFeito!==0)?`${Math.ceil(qntHabFeito/qntHab*100)}% dos hábitos concluídos`:"Nenhum hábito concluido ainda")}</Span>
             {hoje.map((h,i)=><Marcador key={hoje[i].id} info={hoje[i]} /> )}
 
         </ConteudoHoje>
@@ -75,13 +75,10 @@ const ConteudoHoje=styled.div`
     height: 100%;
 `
 const Span=styled.span`
-    color: #bababa;
+    color: ${props=>(props.qnt!==0?"#8fc549":"#bababa")};
     font-size: 18px;
     width: 100%;
     margin-bottom: 28px;
-`
-const Span2=styled.span`
-    color: #8fc549;
 `
 
 const P=styled.p`
