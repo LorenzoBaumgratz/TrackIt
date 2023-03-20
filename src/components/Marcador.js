@@ -6,13 +6,10 @@ import { useLogin } from "../context"
 export default function Marcador(props) {
     const [marcado, setMarcado] = useState(props.info.done)
     const { usuario, qntHabFeito, setQntHabFeito, hoje, setHoje } = useLogin()
-    const [seqAt, setSeqAt] = useState(0)
-    const [seqRec, setSeqRec] = useState(0)
+    const [seqAt, setSeqAt] = useState(hoje[props.numero].currentSequence)
+    const [seqRec, setSeqRec] = useState(hoje[props.numero].highestSequence)
     
-    useEffect(() => {
-        setSeqAt(hoje[props.numero].currentSequence);
-        setSeqRec(hoje[props.numero].highestSequence)
-    }, [])
+
 
     const config = {
         headers: {
