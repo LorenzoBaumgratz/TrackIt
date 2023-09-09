@@ -1,4 +1,7 @@
+## 📝 Description
 
+- "TrackIt" is a web application that allows users to keep track of their habits is a web application that allows users to keep track of their habits
+  
 ## :white_check_mark: Technologies
 <img align="center" alt="LB-CSS"   src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" />
 <img align="center" alt="LB-CSS"   src="https://img.shields.io/badge/styled--components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white" /> 
